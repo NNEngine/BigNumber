@@ -1,4 +1,5 @@
 #include "../includes/utilities.h"
+#include "../includes/Arithmetic.h"
 
 bool is_valid_number(char *number){
     if(number==NULL || number[0]=='\0') return false;
@@ -26,4 +27,32 @@ int min(int a, int b){
 void print_number(struct BigNumber *num){
     if(num==NULL) return;
     puts(num->number);
+}
+
+struct BigNumber *Inc(struct BigNumber *number){
+    if(number==NULL||!is_valid_number(number->number)){
+        errno=EDOM;
+        fprintf(stderr,"Inc: Number is not valid (%s)\n",strerror(errno));
+        return NULL;
+    }
+
+    struct BigNumber *one=Number("1");
+    if(one==NULL)return NULL;
+    struct BigNumber *result=Add(number,one);
+    if(result==NULL) free(one);
+    return result;
+}
+
+struct BigNumber *Dec(struct BigNumber *number){
+    if(number==NULL||!is_valid_number(number->number)){
+        errno=EDOM;
+        fprintf(stderr,"Dec: Number is not valid (%s)\n",strerror(errno));
+        return NULL;
+    }
+
+    struct BigNumber *one=Number("1");
+    if(one==NULL)return NULL;
+    struct BigNumber *result=Sub(number,one);
+    if(result==NULL) free(one);
+    return result;
 }

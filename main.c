@@ -2,6 +2,7 @@
 #include "./includes/utilities.h"
 #include "./includes/Arithmetic.h"
 #include "./includes/Comparison.h"
+#include "./includes/Unary.h"
 
 int main(){
     struct BigNumber *num1 = Number("7879639530");
@@ -28,6 +29,11 @@ int main(){
     printf("%d\n", gte(num1, num2));
     printf("%d\n", et(num1, num2));
     printf("%d\n", net(num1, num2));
+
+    struct BigNumber *num3 = Number("12345678910");
+    print_number(Abs(num3));
+    print_number(Negate(num3));
+    printf("%d\n",Sign(num3));
 
     return 0;
 }
