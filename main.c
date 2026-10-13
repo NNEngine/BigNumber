@@ -35,5 +35,9 @@ int main(){
     print_number(Negate(num3));
     printf("%d\n",Sign(num3));
 
+    print_number(Inc(num3));
+    print_number(Dec(num3));
+
+
     return 0;
 }
