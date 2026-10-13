@@ -273,3 +273,96 @@ struct BigNumber *Div(struct BigNumber *Number1,struct BigNumber *Number2){
     free(rem);
     return div_result;
 }
+
+struct BigNumber *Mod(struct BigNumber *Number1,struct BigNumber *Number2){
+    if(Number1==NULL||Number2==NULL||
+       !is_valid_number(Number1->number)||
+       !is_valid_number(Number2->number)){
+        errno=EDOM;
+        fprintf(stderr,
+            "Mod: Number is not valid (%s)\n",
+            strerror(errno));
+        return NULL;
+    }
+
+    char *a=Number1->number;
+    char *b=Number2->number;
+    int neg=a[0]=='-';
+    if(a[0]=='-'||a[0]=='+')a++;
+    if(b[0]=='-'||b[0]=='+')b++;
+
+    int len1=strlen(a),len2=strlen(b);
+    if(len2==1&&b[0]=='0'){
+        errno=EDOM;
+        fprintf(stderr,
+            "Mod: division by zero (%s)\n",    
+            strerror(errno));
+        return NULL;
+    }
+
+    char *rem=malloc(len1+2);
+    if(rem==NULL){
+        errno=ENOMEM;
+        fprintf(stderr,
+            "Mod: failed to allocate memory (%s)\n",
+            strerror(errno));
+        return NULL;
+    }
+
+    int rlen=0;
+    rem[0]='\0';
+
+    for(int i=0;i<len1;i++){
+        rem[rlen++]=a[i];
+        rem[rlen]='\0';
+
+        int start=0;
+        while(start<rlen-1&&rem[start]=='0')start++;
+        if(start){
+            memmove(rem,rem+start,rlen-start+1);
+            rlen-=start;
+        }
+
+        while(rlen>len2||(rlen==len2&&strcmp(rem,b)>=0)){
+            int borrow=0;
+            for(int j=rlen-1;j>=0;j--){
+                int d=rem[j]-'0'-borrow;
+                int bj=j-(rlen-len2);
+                if(bj>=0)d-=b[bj]-'0';
+                if(d<0){
+                    d+=10;
+                    borrow=1;
+                }else borrow=0;
+                rem[j]=d+'0';
+            }
+
+            start=0;
+            while(start<rlen-1&&rem[start]=='0')start++;
+            if(start){
+                memmove(rem,rem+start,rlen-start+1);
+                rlen-=start;
+            }
+        }
+    }
+
+    int zero=(rlen==1&&rem[0]=='0');
+    char *result=malloc(rlen+2);
+    if(result==NULL){
+        free(rem);
+        errno=ENOMEM;
+        fprintf(stderr,
+            "Mod: failed to allocate memory (%s)\n",
+            strerror(errno));
+        return NULL;
+    }
+
+    int k=0;
+    if(neg&&!zero)result[k++]='-';
+    memcpy(result+k,rem,rlen);
+    result[k+rlen]='\0';
+
+    struct BigNumber *mod_result=Number(result);
+    if(mod_result==NULL)free(result);
+    free(rem);
+    return mod_result;
+}

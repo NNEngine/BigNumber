@@ -3,7 +3,7 @@
 #include "./includes/Arithmetic.h"
 
 int main(){
-    struct BigNumber *num1 = Number("123456789283747892848774293384743938384776789912393842113443");
+    struct BigNumber *num1 = Number("1847439383847767899123938429293733847492938473938471113443");
     struct BigNumber *num2 = Number("9384743722910973923928374382837848009384847392837474912938");
 
     struct BigNumber *result1 = Add(num1, num2);
