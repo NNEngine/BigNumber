@@ -1,10 +1,11 @@
 #include "./includes/BigNumber.h"
 #include "./includes/utilities.h"
 #include "./includes/Arithmetic.h"
+#include "./includes/Comparison.h"
 
 int main(){
-    struct BigNumber *num1 = Number("1847439383847767899123938429293733847492938473938471113443");
-    struct BigNumber *num2 = Number("9384743722910973923928374382837848009384847392837474912938");
+    struct BigNumber *num1 = Number("7879639530");
+    struct BigNumber *num2 = Number("7879639530");
 
     struct BigNumber *result1 = Add(num1, num2);
     print_number(result1);
@@ -20,6 +21,13 @@ int main(){
 
     struct BigNumber *result5 = Mod(num1, num2);
     print_number(result5);
+
+    printf("%d\n", lt(num1, num2));
+    printf("%d\n", lte(num1, num2));
+    printf("%d\n", gt(num1, num2));
+    printf("%d\n", gte(num1, num2));
+    printf("%d\n", et(num1, num2));
+    printf("%d\n", net(num1, num2));
 
     return 0;
 }
