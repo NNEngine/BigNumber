@@ -3,6 +3,7 @@
 #include "./includes/Arithmetic.h"
 #include "./includes/Comparison.h"
 #include "./includes/Unary.h"
+#include "./includes/Bitwise.h"
 
 int main(){
     struct BigNumber *num1 = Number("787963282478248273826486483683643435952784727327834836483630");
@@ -39,6 +40,13 @@ int main(){
     print_number(Dec(num3));
 
     print_number(Sqrt(num3));
+
+    print_number(And(num1, num2));
+    print_number(Or(num1, num2));
+    print_number(Xor(num1, num2));
+    print_number(Not(num1));
+    print_number(LeftShift(num1, 1));
+    print_number(RightShift(num1, 2));
 
     return 0;
 }
