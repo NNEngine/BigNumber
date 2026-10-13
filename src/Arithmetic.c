@@ -3,7 +3,8 @@
 #include "../includes/Arithmetic.h"
 
 struct BigNumber *Add(struct BigNumber *Number1,struct BigNumber *Number2){
-    if(!is_valid_number(Number1->number) ||
+    if(Number1 ==NULL || Number2 == NULL ||
+       !is_valid_number(Number1->number) ||
        !is_valid_number(Number2->number)){
         errno = EDOM;
         fprintf(stderr,
@@ -49,7 +50,8 @@ struct BigNumber *Add(struct BigNumber *Number1,struct BigNumber *Number2){
 }
 
 struct BigNumber *Sub(struct BigNumber *Number1,struct BigNumber *Number2){
-    if(!is_valid_number(Number1->number) ||
+    if(Number1 == NULL || Number2 == NULL ||
+       !is_valid_number(Number1->number) ||
        !is_valid_number(Number2->number)){
         errno = EDOM;
         fprintf(stderr,
