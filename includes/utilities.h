@@ -17,4 +17,6 @@ Function Under Development, Advised Not to Use
 struct BigNumber *Pow(struct BigNumber *Number1,struct BigNumber *Number2);
 */
 
+struct BigNumber *Sqrt(struct BigNumber *number);
+
 #endif

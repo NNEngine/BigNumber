@@ -5,8 +5,8 @@
 #include "./includes/Unary.h"
 
 int main(){
-    struct BigNumber *num1 = Number("7879639530");
-    struct BigNumber *num2 = Number("7879639530");
+    struct BigNumber *num1 = Number("787963282478248273826486483683643435952784727327834836483630");
+    struct BigNumber *num2 = Number("78796313264823286487391738648274917483683624648368249114649530");
 
     struct BigNumber *result1 = Add(num1, num2);
     print_number(result1);
@@ -30,7 +30,7 @@ int main(){
     printf("%d\n", et(num1, num2));
     printf("%d\n", net(num1, num2));
 
-    struct BigNumber *num3 = Number("12345678910");
+    struct BigNumber *num3 = Number("8372938463291364292836");
     print_number(Abs(num3));
     print_number(Negate(num3));
     printf("%d\n",Sign(num3));
@@ -38,6 +38,7 @@ int main(){
     print_number(Inc(num3));
     print_number(Dec(num3));
 
+    print_number(Sqrt(num3));
 
     return 0;
 }
