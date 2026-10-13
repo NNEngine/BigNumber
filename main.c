@@ -18,5 +18,8 @@ int main(){
     struct BigNumber *result4 = Div(num1, num2);
     print_number(result4);
 
+    struct BigNumber *result5 = Mod(num1, num2);
+    print_number(result5);
+
     return 0;
 }
