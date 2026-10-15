@@ -1,0 +1,24 @@
+# Compiled executable
+main
+*.o
+*.out
+
+# Debug files
+core
+core.*
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Build directories
+build/
+dist/
+.git/
+
+# OS files
+.DS_Store
+Thumbs.db
