@@ -96,8 +96,8 @@ Include the required headers in your C program:
 #include "./includes/Bitwise.h"
 
 int main(){
-    struct BigNumber *a=Number("123456789012345678901234567890");
-    struct BigNumber *b=Number("98765432109876543210");
+    struct BigNumber *a=Number("1234567890123456838473828374772283847565838384747478901234567890");
+    struct BigNumber *b=Number("987654321092884757382900009384747289198347483399876543210");
 
     print_number(Add(a,b));
     print_number(Sub(a,b));
