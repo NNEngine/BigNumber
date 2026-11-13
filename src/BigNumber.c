@@ -10,7 +10,7 @@ struct BigNumber *Number(char *number){
         return NULL;
     }
     
-    struct BigNumber *num = malloc(sizeof(struct BigNumber));
+    struct BigNumber *num = (struct BigNumber *)malloc(sizeof(struct BigNumber));
     if(num==NULL){
         errno = ENOMEM;
         fprintf(stderr,
@@ -19,8 +19,21 @@ struct BigNumber *Number(char *number){
         return NULL;
     }
 
-    num->number = number;
-    num->length = strlen(num->number);
+    num->number = malloc(strlen(number) + 1);
+    if(num->number==NULL){
+        free(num);
+        errno = ENOMEM;
+        return NULL;
+    }
+    
+    strcpy(num->number, number);
+    num->length = strlen(number);
+    
     return num;
 }
 
+void FreeNumber(struct BigNumber *num){
+    if(num==NULL) return;
+    free(num->number);
+    free(num);
+}

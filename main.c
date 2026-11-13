@@ -48,5 +48,9 @@ int main(){
     print_number(LeftShift(num1, 1));
     print_number(RightShift(num1, 2));
 
+    FreeNumber(num1);
+    FreeNumber(num2);
+    FreeNumber(num3);
+
     return 0;
 }

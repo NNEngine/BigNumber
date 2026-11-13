@@ -9,5 +9,6 @@ struct BigNumber{
 };
 
 struct BigNumber *Number(char *number);
+void FreeNumber(struct BigNumber *num);
 
 #endif
