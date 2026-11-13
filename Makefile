@@ -1,5 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -O2 -Iincludes
+CFLAGS=-Wall -Wextra -Wpedantic -O2 -Iincludes
+DEBUG_FLAGS=-g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer
 
 SRC=main.c src/Arithmetic.c src/BigNumber.c src/Bitwise.c src/Comparison.c src/Unary.c src/utilities.c
 LIB_SRC=$(filter-out main.c,$(SRC))
@@ -19,6 +20,7 @@ $(TARGET): $(SRC)
 run: $(TARGET)
 	./$(TARGET)
 
+test: CFLAGS += $(DEBUG_FLAGS)
 test: $(TEST_BIN)
 	./$(TEST_BIN)
 
@@ -26,7 +28,6 @@ $(TEST_BIN): $(TEST_SRC) $(LIB_SRC)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(TEST_SRC) $(LIB_SRC) -o $@
 
-# Treat additional command-line arguments as test parameters
 ifneq ($(TEST_CATEGORY),)
 .PHONY: $(TEST_CATEGORY)
 $(TEST_CATEGORY):
@@ -43,4 +44,3 @@ clean:
 	rm -rf $(TARGET) build/
 
 .PHONY: all run test clean
-
