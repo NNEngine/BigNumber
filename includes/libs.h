@@ -8,4 +8,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
+#include <assert.h>
+
 #endif
